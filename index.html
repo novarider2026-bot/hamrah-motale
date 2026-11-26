@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220"><meta name="description" content="همراه مطالعه؛ برنامه‌ریزی و پیگیری درس‌ها">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<title>همراه مطالعه | نسخه حرفه‌ای</title>
+<style>
+:root{color-scheme:dark;--bg:#080f1c;--panel:#111d2e;--panel2:#18263a;--line:#293b53;--text:#edf3fc;--muted:#9aabc1;--accent:#9b9df8;--green:#5bd6a2;--red:#ff8790;--gold:#f3c879}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 95% -5%,#26365b 0,transparent 38%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:850px;margin:auto;padding:20px 14px 50px}header{display:flex;justify-content:space-between;align-items:center;margin:5px 0 18px;gap:10px}
+h1{font-size:24px;margin:0;font-weight:850}.sub{font-size:12px;color:var(--muted);margin-top:5px}.datechip{font-size:11px;color:#cbd5e1;border:1px solid var(--line);padding:8px 10px;border-radius:30px;background:#111d2e}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#0e1929;border:1px solid var(--line);padding:5px;border-radius:16px;margin-bottom:16px}
+nav button{padding:10px 3px;background:transparent;color:var(--muted);font-size:12px;border-radius:11px}nav button.active{background:#263657;color:#fff}
+.view{display:none}.view.active{display:block}.panel{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:15px;margin-bottom:13px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}
+.big{font-size:29px;font-weight:850;color:var(--green)}.track{height:8px;border-radius:20px;background:#091321;overflow:hidden;margin:10px 0}.fill{height:100%;width:0;background:linear-gradient(90deg,#51d6a1,#9bdcbf);border-radius:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#17263a;border:1px solid #2b3d55;border-radius:15px;padding:12px}.stat b{display:block;font-size:20px;margin-bottom:3px}
+button{font:inherit;border:0;cursor:pointer;border-radius:12px;padding:10px 13px;background:var(--accent);color:#10172a;font-weight:750}button.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}button.danger{background:#3a202b;color:#ffb5bc;border:1px solid #673541}button:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 14px}.actions button{font-size:12px}
+h2{font-size:17px;margin:0 0 12px}h3{font-size:14px;margin:0}.section{border:1px solid var(--line);background:#0e1928;border-radius:15px;margin:10px 0;overflow:hidden}
+.sectionhead{padding:12px;display:flex;justify-content:space-between;gap:8px;align-items:center}.task{display:flex;align-items:center;gap:9px;border-top:1px solid #23344a;padding:10px 12px}.task input{width:18px;height:18px;accent-color:var(--green)}.task label{flex:1;font-size:13px;line-height:1.5}.task.done label{text-decoration:line-through;color:#74869d}
+.task small{display:block;color:var(--muted);font-size:10px}.task button{font-size:10px;padding:5px 7px;background:transparent;color:var(--muted);border:1px solid var(--line)}
+input,select,textarea{width:100%;padding:11px 12px;background:#091524;color:var(--text);border:1px solid var(--line);border-radius:11px;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.formgrid .full{grid-column:1/-1}.formactions{display:flex;gap:8px;margin-top:9px}.formactions button{flex:1}
+.hidden{display:none!important}.empty{text-align:center;color:var(--muted);padding:22px;font-size:13px}
+.weekgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.day{background:#17263a;border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center;min-height:62px}.day b{display:block;font-size:12px}.day small{font-size:10px;color:var(--muted)}.day.today{border-color:var(--accent);background:#29375a}
+.calendarhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.calcell{min-height:43px;background:#101c2d;border:1px solid #26374d;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:12px;color:var(--muted)}.calcell.has{border-color:#6471c4;color:#fff}.calcell.selected{background:#35436b;border-color:#a4a6ff;color:white}.calcell em{width:4px;height:4px;background:var(--green);border-radius:50%;margin-top:3px}
+.timer{text-align:center;padding:22px 10px}.clock{font-size:56px;font-weight:850;letter-spacing:1px;font-variant-numeric:tabular-nums}.timer button{min-width:105px;margin:5px}
+input[type=checkbox]{width:auto}.notice{background:#17263a;border:1px solid #334765;border-radius:12px;padding:10px;font-size:12px;color:#c6d2e3;line-height:1.8}
+footer{text-align:center;color:#72849c;font-size:10px;padding:15px}
+@media(max-width:480px){main{padding:16px 11px 40px}.clock{font-size:48px}.weekgrid{gap:3px}.day{padding:7px 1px}.formgrid{grid-template-columns:1fr}.formgrid .full{grid-column:auto}nav button{font-size:11px}}
+</style></head>
+<body><main>
+<header><div><h1>همراه مطالعه</h1><div class="sub">برنامه‌ریزی کن؛ قدم‌به‌قدم پیش برو.</div></div><div class="datechip" id="todayLabel"></div></header>
+<nav>
+<button class="active" data-tab="home">خانه</button><button data-tab="plan">برنامه</button><button data-tab="timer">تایمر</button><button data-tab="stats">آمار</button>
+</nav>
+
+<section id="home" class="view active">
+ <div class="panel"><div class="row"><div><b>پیشرفت همه درس‌ها</b><div class="tiny" id="allCount">۰ از ۰ مورد</div></div><div class="big" id="allPercent">۰٪</div></div><div class="track"><div class="fill" id="allFill"></div></div><div class="stats">
+  <div class="stat"><b id="todayDone">۰</b><span class="tiny">انجام‌شده امروز</span></div><div class="stat"><b id="todayTotal">۰</b><span class="tiny">برنامه امروز</span></div><div class="stat"><b id="subjectCount">۰</b><span class="tiny">درس‌ها</span></div>
+ </div></div>
+ <div class="actions"><button id="addSubjectBtn">＋ افزودن درس</button><button class="secondary" id="addTaskBtn">＋ افزودن کار</button><button class="secondary" id="askNotify">فعال‌سازی یادآوری</button></div>
+ <div class="panel hidden" id="subjectForm"><h2>درس جدید</h2><input id="subjectName" placeholder="مثلاً زیست‌شناسی"><div class="formactions"><button id="saveSubject">ذخیره درس</button><button class="secondary" data-hide="subjectForm">انصراف</button></div></div>
+ <div class="panel hidden" id="taskForm"><h2>کار مطالعاتی جدید</h2><div class="formgrid"><input class="full" id="taskName" placeholder="مثلاً مطالعه گفتار اول"><select id="taskSubject"></select><input id="taskDate" type="date"><input id="taskTime" type="time"><input class="full" id="taskReminder" type="checkbox" style="width:18px"> <label for="taskReminder" class="tiny">برای این کار یادآوری تنظیم شود (نیازمند اجازه اعلان)</label></div><div class="formactions"><button id="saveTask">افزودن به برنامه</button><button class="secondary" data-hide="taskForm">انصراف</button></div></div>
+ <h2>درس‌ها و کارها</h2><div id="subjectList"></div>
+</section>
+
+<section id="plan" class="view">
+ <div class="panel"><h2>برنامه هفتگی</h2><div class="tiny" style="margin-bottom:12px">برای هر روز می‌توانی کارهای مطالعاتی تعیین کنی.</div><div class="weekgrid" id="weekGrid"></div></div>
+ <div class="panel"><div class="calendarhead"><button class="secondary" id="prevMonth">ماه قبل</button><b id="monthTitle"></b><button class="secondary" id="nextMonth">ماه بعد</button></div><div class="calgrid" id="calendar"></div><div class="tiny" id="selectedDateLabel" style="margin-top:12px"></div><div id="selectedTasks"></div></div>
+ <div class="panel"><h2>افزودن به روز انتخاب‌شده</h2><div class="formgrid"><input id="planTaskName" class="full" placeholder="عنوان کار"><select id="planSubject"></select><input id="planTime" type="time"></div><div class="formactions"><button id="savePlanTask">ثبت در این روز</button></div></div>
+</section>
+
+<section id="timer" class="view">
+ <div class="panel timer"><div class="tiny">تایمر تمرکز</div><div class="clock" id="clock">۲۵:۰۰</div><div class="tiny" id="timerStatus">زمان تمرکز آماده است</div><div class="actions" style="justify-content:center"><button id="startTimer">شروع</button><button class="secondary" id="pauseTimer">توقف</button><button class="ghost" id="resetTimer">شروع مجدد</button></div><div class="formgrid"><div><label class="tiny">دقیقه تمرکز</label><input id="focusMinutes" type="number" min="1" max="180" value="25"></div><div><label class="tiny">دقیقه استراحت</label><input id="breakMinutes" type="number" min="1" max="60" value="5"></div></div><div class="notice" style="margin-top:14px">با پایان زمان، اعلان داخل برنامه نمایش داده می‌شود. برای اعلان گوشی، اجازه اعلان مرورگر را هم فعال کن.</div></div>
+</section>
+
+<section id="stats" class="view">
+ <div class="panel"><h2>آمار روزانه</h2><div class="stats"><div class="stat"><b id="statToday">۰</b><span class="tiny">کارهای تکمیل‌شده</span></div><div class="stat"><b id="statMinutes">۰</b><span class="tiny">دقیقه تایمر</span></div><div class="stat"><b id="statRate">۰٪</b><span class="tiny">درصد تکمیل امروز</span></div></div></div>
+ <div class="panel"><h2>هفت روز اخیر</h2><div id="weeklyStats"></div></div>
+ <div class="panel"><h2>پشتیبان‌گیری</h2><div class="tiny" style="line-height:1.8;margin-bottom:10px">برای انتقال اطلاعات به گوشی دیگر، از داده‌ها خروجی بگیر. فایل پشتیبان را در جای امن نگه دار.</div><div class="actions"><button id="exportData">خروجی گرفتن از اطلاعات</button><button class="secondary" id="importBtn">بازیابی فایل پشتیبان</button><input id="importFile" type="file" accept="application/json" class="hidden"></div><button class="danger" id="resetAll">پاک‌کردن همه اطلاعات</button></div>
+</section>
+<footer>نسخه حرفه‌ای همراه مطالعه · اطلاعات به‌صورت محلی روی همین دستگاه ذخیره می‌شود.</footer>
+</main>
+<script>
+const KEY='hamrah-motale-pro-v1',fa=n=>new Intl.NumberFormat('fa-IR').format(n),today=()=>{let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`},uid=()=>Math.random().toString(36).slice(2)+Date.now().toString(36);
+const seed=[{id:uid(),name:'زیست‌شناسی',tasks:[{id:uid(),name:'فصل دوم ـ گفتار ۱',date:today(),done:false,reminder:false},{id:uid(),name:'فصل دوم ـ گفتار ۲',date:today(),done:false,reminder:false},{id:uid(),name:'فصل دوم ـ گفتار ۳',date:today(),done:false,reminder:false},{id:uid(),name:'فعالیت‌ها و نکته‌ها',date:today(),done:false,reminder:false},{id:uid(),name:'امتحان گرفتن از خود',date:today(),done:false,reminder:false}]}];
+let data;try{data=JSON.parse(localStorage.getItem(KEY))||{subjects:seed,minutes:{},sessions:[]}}catch{data={subjects:seed,minutes:{},sessions:[]}}
+data.subjects ||= [];data.minutes ||= {};data.sessions ||= [];
+let selectedDate=today(),calMonth=new Date(),timerLeft=1500,timerMode='focus',timerInterval=null,timerRunning=false;
+const $=id=>document.getElementById(id),allTasks=()=>data.subjects.flatMap(s=>s.tasks.map(t=>({...t,subject:s.name,subjectId:s.id}))),save=()=>localStorage.setItem(KEY,JSON.stringify(data));
+const dateLabel=d=>new Date(d+'T12:00:00').toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long'});
+$('todayLabel').textContent=dateLabel(today());
+function notify(title,body){if('Notification'in window&&Notification.permission==='granted'){try{new Notification(title,{body,icon:'icon.svg'})}catch{}}}
+function renderHome(){
+ let tasks=allTasks(),done=tasks.filter(t=>t.done).length,p=tasks.length?Math.round(done/tasks.length*100):0,td=tasks.filter(t=>t.date===today()),tdone=td.filter(t=>t.done).length;
+ $('allCount').textContent=`${fa(done)} از ${fa(tasks.length)} مورد`;$('allPercent').textContent=fa(p)+'٪';$('allFill').style.width=p+'%';$('todayDone').textContent=fa(tdone);$('todayTotal').textContent=fa(td.length);$('subjectCount').textContent=fa(data.subjects.length);
+ $('subjectList').innerHTML='';
+ if(!data.subjects.length){$('subjectList').innerHTML='<div class="empty">هنوز درسی اضافه نکرده‌ای.</div>'}
+ data.subjects.forEach(s=>{
+  let box=document.createElement('div');box.className='section';let head=document.createElement('div');head.className='sectionhead';
+  let name=document.createElement('div');name.innerHTML='<h3></h3><span class="tiny"></span>';name.querySelector('h3').textContent=s.name;name.querySelector('span').textContent=`${fa(s.tasks.filter(t=>t.done).length)} از ${fa(s.tasks.length)} کار انجام شده`;
+  let btns=document.createElement('div');let add=document.createElement('button');add.className='ghost';add.textContent='＋ کار';add.style.fontSize='11px';add.onclick=()=>{openTaskForm(s.id)};
+  let ren=document.createElement('button');ren.className='ghost';ren.textContent='ویرایش';ren.style.fontSize='11px';ren.onclick=()=>{let v=prompt('نام درس',s.name);if(v&&v.trim()){s.name=v.trim();save();renderAll()}};
+  let del=document.createElement('button');del.className='danger';del.textContent='حذف';del.style.fontSize='11px';del.onclick=()=>{if(confirm('این درس و تمام کارهایش حذف شود؟')){data.subjects=data.subjects.filter(x=>x.id!==s.id);save();renderAll()}};
+  btns.append(add,ren,del);head.append(name,btns);box.append(head);
+  s.tasks.sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  s.tasks.forEach(t=>{let r=document.createElement('div');r.className='task'+(t.done?' done':'');let c=document.createElement('input');c.type='checkbox';c.checked=t.done;c.onchange=()=>{t.done=c.checked;t.completedAt=t.done?today():null;save();renderAll()};let l=document.createElement('label');l.textContent=t.name;let sm=document.createElement('small');sm.textContent=(t.date?dateLabel(t.date):'بدون تاریخ')+(t.time?' · '+t.time:'')+(t.reminder?' · یادآوری':'');l.append(sm);let e=document.createElement('button');e.textContent='ویرایش';e.onclick=()=>editTask(s,t);let x=document.createElement('button');x.textContent='×';x.onclick=()=>{if(confirm('این کار حذف شود؟')){s.tasks=s.tasks.filter(z=>z.id!==t.id);save();renderAll()}};r.append(c,l,e,x);box.append(r)});
+  $('subjectList').append(box);
+ });
+ fillSubjectSelects();
+}
+function fillSubjectSelects(){['taskSubject','planSubject'].forEach(id=>{let el=$(id),old=el.value;el.innerHTML='';data.subjects.forEach(s=>{let o=document.createElement('option');o.value=s.id;o.textContent=s.name;el.append(o)});if([...el.options].some(o=>o.value===old))el.value=old})}
+function openTaskForm(subjectId){$('taskForm').classList.remove('hidden');fillSubjectSelects();if(subjectId)$('taskSubject').value=subjectId;$('taskName').focus()}
+function editTask(s,t){let name=prompt('عنوان کار',t.name);if(name===null)return;if(name.trim())t.name=name.trim();let d=prompt('تاریخ (YYYY-MM-DD)، خالی برای بدون تاریخ',t.date||'');if(d!==null)t.date=d.trim();save();renderAll()}
+function renderPlan(){
+ let week=$('weekGrid');week.innerHTML='';let now=new Date(),start=new Date(now);start.setDate(now.getDate()-((now.getDay()+6)%7));
+ const days=['دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه','یکشنبه'];
+ for(let i=0;i<7;i++){let d=new Date(start);d.setDate(start.getDate()+i);let iso=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,n=allTasks().filter(t=>t.date===iso).length,el=document.createElement('div');el.className='day'+(iso===today()?' today':'');el.innerHTML=`<b>${days[i]}</b><small>${fa(n)} کار</small>`;el.onclick=()=>{selectedDate=iso;renderCalendar()};week.append(el)}
+ renderCalendar();
+}
+function renderCalendar(){
+ let y=calMonth.getFullYear(),m=calMonth.getMonth();$('monthTitle').textContent=new Date(y,m,1).toLocaleDateString('fa-IR',{month:'long',year:'numeric'});
+ let first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate(),el=$('calendar');el.innerHTML='';
+ ['د','س','چ','پ','ج','ش','ی'].forEach(x=>{let a=document.createElement('div');a.className='tiny';a.style.textAlign='center';a.textContent=x;el.append(a)});
+ for(let i=0;i<first;i++){let a=document.createElement('div');el.append(a)}
+ for(let n=1;n<=days;n++){let iso=`${y}-${String(m+1).padStart(2,'0')}-${String(n).padStart(2,'0')}`,count=allTasks().filter(t=>t.date===iso).length,a=document.createElement('button');a.className='calcell'+(count?' has':'')+(iso===selectedDate?' selected':'');a.textContent=fa(n);if(count){let dot=document.createElement('em');a.append(dot)}a.onclick=()=>{selectedDate=iso;renderCalendar()};el.append(a)}
+ $('selectedDateLabel').textContent='برنامه '+dateLabel(selectedDate);let list=$('selectedTasks');list.innerHTML='';let ts=allTasks().filter(t=>t.date===selectedDate);
+ if(!ts.length){list.innerHTML='<div class="empty">برای این روز کاری ثبت نشده.</div>';return}
+ ts.forEach(t=>{let p=document.createElement('div');p.className='task';let b=document.createElement('span');b.textContent=(t.done?'✓ ':'○ ')+t.name+' · '+t.subject+(t.time?' · '+t.time:'');p.append(b);list.append(p)});
+}
+function renderStats(){
+ let ts=allTasks(),todayTasks=ts.filter(t=>t.date===today()),completed=todayTasks.filter(t=>t.done).length,mins=data.minutes[today()]||0;
+ $('statToday').textContent=fa(completed);$('statMinutes').textContent=fa(mins);$('statRate').textContent=fa(todayTasks.length?Math.round(completed/todayTasks.length*100):0)+'٪';
+ let wrap=$('weeklyStats');wrap.innerHTML='';for(let i=6;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let iso=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,a=ts.filter(t=>t.date===iso),c=a.filter(t=>t.done).length,row=document.createElement('div');row.style.margin='12px 0';row.innerHTML=`<div class="row"><span class="tiny">${dateLabel(iso)}</span><b style="font-size:12px">${fa(c)} / ${fa(a.length)}</b></div><div class="track"><div class="fill" style="width:${a.length?c/a.length*100:0}%"></div></div>`;wrap.append(row)}
+}
+function renderAll(){renderHome();renderPlan();renderStats()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.tab));if(b.dataset.tab==='plan')renderPlan();if(b.dataset.tab==='stats')renderStats()});
+$('addSubjectBtn').onclick=()=>$('subjectForm').classList.toggle('hidden');$('addTaskBtn').onclick=()=>openTaskForm();
+document.querySelectorAll('[data-hide]').forEach(b=>b.onclick=()=$(b.dataset.hide).classList.add('hidden'));
+$('saveSubject').onclick=()=>{let n=$('subjectName').value.trim();if(!n)return;data.subjects.push({id:uid(),name:n,tasks:[]});$('subjectName').value='';$('subjectForm').classList.add('hidden');save();renderAll()};
+$('saveTask').onclick=()=>{let s=data.subjects.find(x=>x.id===$('taskSubject').value),n=$('taskName').value.trim();if(!s||!n)return;let t={id:uid(),name:n,date:$('taskDate').value||today(),time:$('taskTime').value,done:false,reminder:$('taskReminder').checked,reminded:false};s.tasks.push(t);$('taskName').value='';$('taskForm').classList.add('hidden');save();renderAll();scheduleReminder(t)};
+$('prevMonth').onclick=()=>{calMonth.setMonth(calMonth.getMonth()-1);renderCalendar()};$('nextMonth').onclick=()=>{calMonth.setMonth(calMonth.getMonth()+1);renderCalendar()};
+$('savePlanTask').onclick=()=>{let s=data.subjects.find(x=>x.id===$('planSubject').value),n=$('planTaskName').value.trim();if(!s||!n){alert('اول یک درس بساز و عنوان کار را وارد کن.');return}s.tasks.push({id:uid(),name:n,date:selectedDate,time:$('planTime').value,done:false,reminder:false});$('planTaskName').value='';$('planTime').value='';save();renderAll();};
+$('askNotify').onclick=async()=>{if(!('Notification'in window)){alert('این مرورگر از اعلان پشتیبانی نمی‌کند.');return}let p=await Notification.requestPermission();alert(p==='granted'?'اعلان‌ها فعال شدند.':'اجازه اعلان داده نشد.')};
+function scheduleReminder(t){if(!t.reminder||!t.date||!t.time)return;if(!('Notification'in window)||Notification.permission!=='granted')return;let target=new Date(t.date+'T'+t.time),delay=target-Date.now();if(delay>0&&delay<2147480000)setTimeout(()=>{notify('یادآوری مطالعه',t.name);t.reminded=true;save()},delay)}
+allTasks().forEach(scheduleReminder);
+
+function updateClock(){let mm=Math.floor(timerLeft/60),ss=timerLeft%60;$('clock').textContent=fa(mm).padStart(2,'۰')+':'+fa(ss).padStart(2,'۰')}
+function stopTimer(){if(timerInterval)clearInterval(timerInterval);timerInterval=null;timerRunning=false}
+$('startTimer').onclick=()=>{if(timerRunning)return;timerRunning=true;$('timerStatus').textContent=timerMode==='focus'?'در حال تمرکز':'زمان استراحت';timerInterval=setInterval(()=>{timerLeft--;updateClock();if(timerLeft<=0){stopTimer();if(timerMode==='focus'){data.minutes[today()]=(data.minutes[today()]||0)+Number($('focusMinutes').value||25);save();renderStats();notify('آفرین!','زمان تمرکز تمام شد. کمی استراحت کن.');timerMode='break';timerLeft=Math.max(1,Number($('breakMinutes').value)||5)*60;$('timerStatus').textContent='تمرکز تمام شد؛ زمان استراحت';}else{notify('استراحت تمام شد','اگر آماده‌ای، دوره بعدی تمرکز را شروع کن.');timerMode='focus';timerLeft=Math.max(1,Number($('focusMinutes').value)||25)*60;$('timerStatus').textContent='استراحت تمام شد؛ آماده تمرکز';}updateClock() }},1000)};
+$('pauseTimer').onclick=()=>{stopTimer();$('timerStatus').textContent='تایمر متوقف شد'};$('resetTimer').onclick=()=>{stopTimer();timerMode='focus';timerLeft=Math.max(1,Number($('focusMinutes').value)||25)*60;$('timerStatus').textContent='زمان تمرکز آماده است';updateClock()};$('focusMinutes').onchange=$('resetTimer').onclick;$('breakMinutes').onchange=()=>{};
+$('exportData').onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='hamrah-motale-backup.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let v=JSON.parse(await f.text());if(!Array.isArray(v.subjects))throw 0;data=v;save();renderAll();alert('اطلاعات بازیابی شد.')}catch{alert('فایل پشتیبان معتبر نیست.')}};
+$('resetAll').onclick=()=>{if(confirm('تمام درس‌ها، برنامه‌ها و آمار پاک شوند؟')){data={subjects:[],minutes:{},sessions:[]};save();renderAll()}};
+updateClock();renderAll();
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
